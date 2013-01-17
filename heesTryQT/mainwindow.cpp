@@ -19,6 +19,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->compAttributeBox->setDisabled(true);
 
     ui->graphicsView->setScene( scene );
+
+    QObject::connect(scene, SIGNAL(selectionChanged()), this, SLOT(selectionChangedInScene()) );
 }
 
 MainWindow::~MainWindow()
@@ -30,4 +32,23 @@ MainWindow::~MainWindow()
 void MainWindow::on_addButton_clicked()
 {
     scene->addItem( new HEESGraphicsItem(ui->compTypeBox->currentIndex()) );
+}
+
+void MainWindow::selectionChangedInScene()
+{
+    QList<QGraphicsItem *> itemList = scene->selectedItems();
+    if( itemList.empty() )
+    {
+        ui->compAttributeBox->setEnabled(false);
+    }
+    else if( itemList.size() > 1 )
+    {
+        scene->clearSelection();
+        ui->compAttributeBox->setEnabled(false);
+    }
+    else
+    {
+        ui->compAttributeBox->setEnabled(true);
+        ui->attributeTableView->setModel( static_cast<HEESGraphicsItem*>(itemList[0])->MyAttributes() );
+    }
 }

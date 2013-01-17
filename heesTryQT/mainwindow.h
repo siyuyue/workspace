@@ -15,6 +15,9 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
+public slots:
+    void selectionChangedInScene();
     
 private slots:
     void on_addButton_clicked();

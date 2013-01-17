@@ -3,6 +3,7 @@
 
 #include <QGraphicsItem>
 #include <QPainter>
+#include "derivedattributes.h"
 
 enum ItemType{
     SOURCE, BANK, LOAD, CTI, CONVERTER
@@ -14,6 +15,7 @@ public:
     HEESGraphicsItem(int t);
     virtual QRectF boundingRect() const;
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    DerivedAttributes * MyAttributes();
 
 private:
     ItemType type;
@@ -21,6 +23,8 @@ private:
     qreal yPos;
     qreal width;
     qreal height;
+
+    DerivedAttributes attributes;
 };
 
 #endif // HEESGRAPHICSITEM_H

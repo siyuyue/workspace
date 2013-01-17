@@ -21,3 +21,8 @@ void HEESGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *
 {
     painter->drawRect(QRectF(xPos, yPos, width, height));
 }
+
+DerivedAttributes * HEESGraphicsItem::MyAttributes()
+{
+    return &attributes;
+}

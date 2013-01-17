@@ -19,7 +19,7 @@
      <rect>
       <x>10</x>
       <y>0</y>
-      <width>571</width>
+      <width>561</width>
       <height>531</height>
      </rect>
     </property>
@@ -27,9 +27,9 @@
    <widget class="QComboBox" name="compTypeBox">
     <property name="geometry">
      <rect>
-      <x>590</x>
+      <x>580</x>
       <y>0</y>
-      <width>201</width>
+      <width>211</width>
       <height>27</height>
      </rect>
     </property>
@@ -40,9 +40,9 @@
    <widget class="QPushButton" name="addButton">
     <property name="geometry">
      <rect>
-      <x>590</x>
+      <x>580</x>
       <y>30</y>
-      <width>201</width>
+      <width>211</width>
       <height>27</height>
      </rect>
     </property>
@@ -56,10 +56,10 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>590</x>
+      <x>580</x>
       <y>70</y>
-      <width>201</width>
-      <height>271</height>
+      <width>211</width>
+      <height>331</height>
      </rect>
     </property>
     <property name="title">
@@ -73,8 +73,8 @@
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>201</width>
-       <height>271</height>
+       <width>211</width>
+       <height>331</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
@@ -183,22 +183,11 @@
        </widget>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_4">
-        <item>
-         <widget class="QPushButton" name="saveButton">
-          <property name="text">
-           <string>Save</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="deleteButton">
-          <property name="text">
-           <string>Delete</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       <widget class="QPushButton" name="deleteButton">
+        <property name="text">
+         <string>Delete</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
@@ -210,7 +199,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>25</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

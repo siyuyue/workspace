@@ -20,6 +20,9 @@ signals:
     
 public slots:
     
+private:
+    QList<QString> names;
+    QList<QString> values;
 };
 
 #endif // DERIVEDATTRIBUTES_H
