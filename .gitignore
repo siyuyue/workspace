@@ -14,3 +14,6 @@
 
 # QT Environment Configurations
 *.user
+
+# QT Build Folder
+QT-build/
