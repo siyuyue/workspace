@@ -40,11 +40,13 @@ void MainWindow::selectionChangedInScene()
     if( itemList.empty() )
     {
         ui->compAttributeBox->setEnabled(false);
+        ui->attributeTableView->setModel(NULL);
     }
     else if( itemList.size() > 1 )
     {
         scene->clearSelection();
         ui->compAttributeBox->setEnabled(false);
+        ui->attributeTableView->setModel(NULL);
     }
     else
     {
