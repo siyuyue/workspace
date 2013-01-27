@@ -44,6 +44,7 @@ void MainWindow::selectionChangedInScene()
     {
         ui->compAttributeBox->setEnabled(false);
         ui->attributeTableView->setModel(NULL);
+        ui->typeNameLabel->clear();
         ui->nameEdit->clear();
         ui->derivedEdit->clear();
     }
@@ -52,6 +53,7 @@ void MainWindow::selectionChangedInScene()
         scene->clearSelection();
         ui->compAttributeBox->setEnabled(false);
         ui->attributeTableView->setModel(NULL);
+        ui->typeNameLabel->clear();
         ui->nameEdit->clear();
         ui->derivedEdit->clear();
     }
@@ -59,6 +61,7 @@ void MainWindow::selectionChangedInScene()
     {
         ui->compAttributeBox->setEnabled(true);
         ui->attributeTableView->setModel( static_cast<HEESGraphicsItem*>(itemList[0])->myAttributes() );
+        ui->typeNameLabel->setText( ui->compTypeBox->itemText( static_cast<HEESGraphicsItem*>(itemList[0])->myType() ) );
         ui->nameEdit->setText( static_cast<HEESGraphicsItem*>(itemList[0])->getName() );
         ui->derivedEdit->setText( static_cast<HEESGraphicsItem*>(itemList[0])->getDerivedType() );
     }

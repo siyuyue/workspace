@@ -5,33 +5,33 @@
 #include <QPainter>
 #include <QString>
 #include "derivedattributes.h"
+#include "arrowitem.h"
 
 enum ItemType{
     SOURCE, BANK, LOAD, CTI, CONVERTER
 };
 
-class HEESGraphicsItem : public QGraphicsItem
+class HEESGraphicsItem : public QGraphicsPolygonItem
 {
 public:
     HEESGraphicsItem(int t);
-    virtual QRectF boundingRect() const;
-    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+
     DerivedAttributes * myAttributes();
     QString getName();
     QString getDerivedType();
     void setName( QString str );
     void setDerivedType( QString str );
+    ItemType myType();
 
 private:
     ItemType type;
-    qreal xPos;
-    qreal yPos;
-    qreal width;
-    qreal height;
 
     DerivedAttributes attributes;
     QString name;
     QString derivedType;
+
+    ArrowItem *leftArrow;
+    ArrowItem *rightArrow;
 };
 
 #endif // HEESGRAPHICSITEM_H

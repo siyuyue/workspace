@@ -15,10 +15,12 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     derivedattributes.cpp \
-    heesgraphicsitem.cpp
+    heesgraphicsitem.cpp \
+    arrowitem.cpp
 
 HEADERS  += mainwindow.h \
     derivedattributes.h \
-    heesgraphicsitem.h
+    heesgraphicsitem.h \
+    arrowitem.h
 
 FORMS    += mainwindow.ui
