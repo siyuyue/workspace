@@ -26,11 +26,11 @@ QVariant DerivedAttributes::headerData( int section, Qt::Orientation orientation
         if( orientation == Qt::Horizontal )
             if( section == 0 )
             {
-                return tr("Name");
+                return QString("Name");
             }
             else if(section == 1)
             {
-                return tr("Value");
+                return QString("Value");
             }
     }
     return QVariant();
@@ -42,7 +42,7 @@ QVariant DerivedAttributes::data( const QModelIndex & index, int role) const
         return QVariant();
 
     if( index.row() == names.size() )
-        return tr("...");
+        return QString("...");
     else if( index.row() > names.size() )
         return QVariant();
 

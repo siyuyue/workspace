@@ -22,6 +22,10 @@ public slots:
 private slots:
     void on_addButton_clicked();
 
+    void on_nameEdit_editingFinished();
+
+    void on_derivedEdit_editingFinished();
+
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *scene;

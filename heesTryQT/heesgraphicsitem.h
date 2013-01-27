@@ -3,6 +3,7 @@
 
 #include <QGraphicsItem>
 #include <QPainter>
+#include <QString>
 #include "derivedattributes.h"
 
 enum ItemType{
@@ -15,7 +16,11 @@ public:
     HEESGraphicsItem(int t);
     virtual QRectF boundingRect() const;
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-    DerivedAttributes * MyAttributes();
+    DerivedAttributes * myAttributes();
+    QString getName();
+    QString getDerivedType();
+    void setName( QString str );
+    void setDerivedType( QString str );
 
 private:
     ItemType type;
@@ -25,6 +30,8 @@ private:
     qreal height;
 
     DerivedAttributes attributes;
+    QString name;
+    QString derivedType;
 };
 
 #endif // HEESGRAPHICSITEM_H
