@@ -11,6 +11,8 @@ enum ItemType{
     SOURCE, BANK, LOAD, CTI, CONVERTER
 };
 
+class ArrowItem;
+
 class HEESGraphicsItem : public QGraphicsPolygonItem
 {
 public:

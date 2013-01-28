@@ -4,16 +4,13 @@
 #include "heesgraphicsitem.h"
 #include <QGraphicsLineItem>
 
+class HEESGraphicsItem;
+
 class ArrowItem : public QGraphicsLineItem
 {
-    Q_OBJECT
 public:
-    explicit ArrowItem(HEESGraphicsItem *startItemP, HEESGraphicsItem *endItemP, bool isLeftPort = true, QObject *parent = 0);
-    
-signals:
-    
-public slots:
-    
+    explicit ArrowItem(HEESGraphicsItem *startItemP, HEESGraphicsItem *endItemP, bool isLeftPort = true, QObject *parent = 0);    
+
 private:
     HEESGraphicsItem *startItem;
     HEESGraphicsItem *endItem;

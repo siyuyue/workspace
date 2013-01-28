@@ -5,7 +5,7 @@ using namespace std;
 
 const int size_x = 5;
 const int size_y = 5;
-const int mini_size = 3;
+const int mini_size = 5;
 
 void find(int posx, int posy, int sx, int ex, int sy, int ey, vector<string> &board)
 {
