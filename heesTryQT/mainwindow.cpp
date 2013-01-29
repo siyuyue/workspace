@@ -7,7 +7,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    scene = new QGraphicsScene;
+    scene = new HEESSystemScene;
     ui->setupUi(this);
     ui->compTypeBox->addItem(QString("Source"));
     ui->compTypeBox->addItem(QString("Bank"));
@@ -35,6 +35,21 @@ MainWindow::~MainWindow()
 void MainWindow::on_addButton_clicked()
 {
     scene->addItem( new HEESGraphicsItem(ui->compTypeBox->currentIndex()) );
+}
+
+void MainWindow::on_deleteButton_clicked()
+{
+    ui->compAttributeBox->setEnabled(false);
+    ui->attributeTableView->setModel(NULL);
+    ui->typeNameLabel->clear();
+    ui->nameEdit->clear();
+    ui->derivedEdit->clear();
+
+    QGraphicsItem *item = scene->selectedItems()[0];
+    scene->removeItem(item);
+    scene->clearSelection();
+
+    delete item;
 }
 
 void MainWindow::selectionChangedInScene()

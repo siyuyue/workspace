@@ -43,7 +43,7 @@ QVariant DerivedAttributes::data( const QModelIndex & index, int role) const
 
     if( index.row() == names.size() )
         return QString("...");
-    else if( index.row() > names.size() )
+    else if( index.row() > names.size() || index.row() < 0 )
         return QVariant();
 
     if( index.column() == 0 )

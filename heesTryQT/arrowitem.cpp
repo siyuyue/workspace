@@ -1,6 +1,6 @@
 #include "arrowitem.h"
 
-ArrowItem::ArrowItem(HEESGraphicsItem *startItem, HEESGraphicsItem *endItem, bool isLeftPort, QObject *parent):
+ArrowItem::ArrowItem(HEESGraphicsItem *startItemP, HEESGraphicsItem *endItemP, bool isLeftPort, QGraphicsItem *parent):
     QGraphicsLineItem(parent)
 {
     startItem = startItemP;
@@ -37,5 +37,5 @@ ArrowItem::ArrowItem(HEESGraphicsItem *startItem, HEESGraphicsItem *endItem, boo
     }
 
     QLineF line( mapFromItem(startItem, startOffsetX, startOffsetY), mapFromItem(endItem, endOffsetX, endOffsetY) );
-    setline(line);
+    setLine(line);
 }

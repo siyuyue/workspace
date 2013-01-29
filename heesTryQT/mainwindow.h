@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QGraphicsScene>
+#include "heessystemscene.h"
 
 namespace Ui {
 class MainWindow;
@@ -26,9 +27,11 @@ private slots:
 
     void on_derivedEdit_editingFinished();
 
+    void on_deleteButton_clicked();
+
 private:
     Ui::MainWindow *ui;
-    QGraphicsScene *scene;
+    HEESSystemScene *scene;
 };
 
 #endif // MAINWINDOW_H
