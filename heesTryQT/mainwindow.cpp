@@ -75,21 +75,47 @@ void MainWindow::selectionChangedInScene()
     else
     {
         ui->compAttributeBox->setEnabled(true);
-        ui->attributeTableView->setModel( static_cast<HEESGraphicsItem*>(itemList[0])->myAttributes() );
-        ui->typeNameLabel->setText( ui->compTypeBox->itemText( static_cast<HEESGraphicsItem*>(itemList[0])->myType() ) );
-        ui->nameEdit->setText( static_cast<HEESGraphicsItem*>(itemList[0])->getName() );
-        ui->derivedEdit->setText( static_cast<HEESGraphicsItem*>(itemList[0])->getDerivedType() );
+        HEESGraphicsItem *selectedItem = static_cast<HEESGraphicsItem*>(itemList[0]);
+        ui->attributeTableView->setModel( selectedItem->myAttributes() );
+        ui->typeNameLabel->setText( ui->compTypeBox->itemText( selectedItem->myType() ) );
+        ui->nameEdit->setText( selectedItem->name );
+        ui->derivedEdit->setText( selectedItem->derivedType );
+
+        if( selectedItem->myType() == CONVERTER )
+        {
+            ui->selectPortAButton->setEnabled(true);
+            ui->selectPortBButton->setEnabled(true);
+
+            ui->portANameLabel->setText( selectedItem->portAName );
+            ui->portBNameLabel->setText( selectedItem->portBName );
+        }
+        else
+        {
+            ui->selectPortAButton->setEnabled(false);
+            ui->selectPortBButton->setEnabled(false);
+        }
     }
 }
 
 void MainWindow::on_nameEdit_editingFinished()
 {
     QList<QGraphicsItem *> itemList = scene->selectedItems();
-    static_cast<HEESGraphicsItem*>(itemList[0])->setName( ui->nameEdit->text() );
+    static_cast<HEESGraphicsItem*>(itemList[0])->name = ui->nameEdit->text();
 }
 
 void MainWindow::on_derivedEdit_editingFinished()
 {
     QList<QGraphicsItem *> itemList = scene->selectedItems();
-    static_cast<HEESGraphicsItem*>(itemList[0])->setDerivedType( ui->derivedEdit->text() );
+    static_cast<HEESGraphicsItem*>(itemList[0])->derivedType = ui->derivedEdit->text();
+}
+
+void MainWindow::on_selectPortAButton_clicked()
+{
+    scene->setAddArrowMode();
+    ui->statusBar->showMessage( QString("Choose Port A.") );
+}
+
+void MainWindow::on_selectPortBButton_clicked()
+{
+    scene->setAddArrowMode();
 }

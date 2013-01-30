@@ -73,26 +73,6 @@ DerivedAttributes * HEESGraphicsItem::myAttributes()
     return &attributes;
 }
 
-QString HEESGraphicsItem::getName()
-{
-    return name;
-}
-
-QString HEESGraphicsItem::getDerivedType()
-{
-    return derivedType;
-}
-
-void HEESGraphicsItem::setName(QString str)
-{
-    name = str;
-}
-
-void HEESGraphicsItem::setDerivedType(QString str)
-{
-    derivedType = str;
-}
-
 ItemType HEESGraphicsItem::myType()
 {
     return type;

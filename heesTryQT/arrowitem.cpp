@@ -36,6 +36,9 @@ ArrowItem::ArrowItem(HEESGraphicsItem *startItemP, HEESGraphicsItem *endItemP, b
         break;
     }
 
+    setFlag(QGraphicsItem::ItemIsMovable, false);
+    setFlag(QGraphicsItem::ItemIsSelectable, false);
+
     QLineF line( mapFromItem(startItem, startOffsetX, startOffsetY), mapFromItem(endItem, endOffsetX, endOffsetY) );
     setLine(line);
 }

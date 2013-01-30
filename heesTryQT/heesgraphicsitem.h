@@ -19,19 +19,17 @@ public:
     HEESGraphicsItem(int t);
 
     DerivedAttributes * myAttributes();
-    QString getName();
-    QString getDerivedType();
-    void setName( QString str );
-    void setDerivedType( QString str );
     ItemType myType();
+
+public:
+    QString name;
+    QString derivedType;
+    QString portAName;
+    QString portBName;
 
 private:
     ItemType type;
-
     DerivedAttributes attributes;
-    QString name;
-    QString derivedType;
-
     ArrowItem *leftArrow;
     ArrowItem *rightArrow;
 };

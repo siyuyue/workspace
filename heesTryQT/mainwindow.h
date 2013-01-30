@@ -29,6 +29,10 @@ private slots:
 
     void on_deleteButton_clicked();
 
+    void on_selectPortAButton_clicked();
+
+    void on_selectPortBButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     HEESSystemScene *scene;
