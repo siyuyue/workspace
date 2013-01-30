@@ -17,12 +17,14 @@ SOURCES += main.cpp\
     derivedattributes.cpp \
     heesgraphicsitem.cpp \
     arrowitem.cpp \
-    heessystemscene.cpp
+    heessystemscene.cpp \
+    heesitemwidget.cpp
 
 HEADERS  += mainwindow.h \
     derivedattributes.h \
     heesgraphicsitem.h \
     arrowitem.h \
-    heessystemscene.h
+    heessystemscene.h \
+    heesitemwidget.h
 
 FORMS    += mainwindow.ui
