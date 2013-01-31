@@ -33,6 +33,7 @@ public:
 
 signals:
     void selectPort();
+    void removeItem(HEESGraphicsItem *item);
 
 public slots:
     void portSelectedFromScene(HEESGraphicsItem *port);
@@ -42,6 +43,7 @@ private slots:
     void derivedEditFinished();
     void selectAClicked();
     void selectBClicked();
+    void removeClicked();
 
 private:
     QLabel *typeLabel;
@@ -61,7 +63,7 @@ private:
     QLabel *derivedLabel;
     QLineEdit *derivedEdit;
     QTableView *attributeTableView;
-    QPushButton *deleteButton;
+    QPushButton *removeButton;
 
     HEESGraphicsItem *item;
 

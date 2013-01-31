@@ -20,6 +20,7 @@ public:
 public slots:
     void selectionChangedInScene();
     void selectPortInScene();
+    void removeItemInScene(HEESGraphicsItem* item);
     
 private slots:
     void on_addButton_clicked();

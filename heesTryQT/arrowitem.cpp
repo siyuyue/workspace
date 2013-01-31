@@ -1,10 +1,10 @@
 #include "arrowitem.h"
 
-ArrowItem::ArrowItem(HEESGraphicsItem *startItemP, HEESGraphicsItem *endItemP, bool isLeftPort, QGraphicsItem *parent):
+ArrowItem::ArrowItem(bool isLeftPort, QGraphicsItem *parent):
     QGraphicsLineItem(parent)
 {
-    startItem = startItemP;
-    endItem = endItemP;
+    startItem = static_cast<HEESGraphicsItem*>(parent);
+    endItem = NULL;
     if( isLeftPort )
     {
         startOffsetX = -30;
@@ -15,6 +15,26 @@ ArrowItem::ArrowItem(HEESGraphicsItem *startItemP, HEESGraphicsItem *endItemP, b
         startOffsetX = 0;
         startOffsetY = 15;
     }
+
+    setFlag(QGraphicsItem::ItemIsMovable, false);
+    setFlag(QGraphicsItem::ItemIsSelectable, false);
+
+    setEndItem(NULL);
+}
+
+ArrowItem::~ArrowItem()
+{
+    if( endItem != NULL )
+        endItem->removeConverter(startItem);
+}
+
+void ArrowItem::setEndItem(HEESGraphicsItem *item)
+{
+    if(endItem != NULL)
+        endItem->removeConverter(startItem);
+    endItem = item;
+    if(endItem == NULL)
+        return;
 
     switch( endItem->myType() )
     {
@@ -35,9 +55,7 @@ ArrowItem::ArrowItem(HEESGraphicsItem *startItemP, HEESGraphicsItem *endItemP, b
         endOffsetY = 40;
         break;
     }
-
-    setFlag(QGraphicsItem::ItemIsMovable, false);
-    setFlag(QGraphicsItem::ItemIsSelectable, false);
+    endItem->addConverter(startItem);
 
     QLineF line( mapFromItem(startItem, startOffsetX, startOffsetY), mapFromItem(endItem, endOffsetX, endOffsetY) );
     setLine(line);
@@ -45,6 +63,14 @@ ArrowItem::ArrowItem(HEESGraphicsItem *startItemP, HEESGraphicsItem *endItemP, b
 
 void ArrowItem::updatePosition()
 {
-    QLineF line( mapFromItem(startItem, startOffsetX, startOffsetY), mapFromItem(endItem, endOffsetX, endOffsetY) );
-    setLine(line);
+    if( endItem != NULL )
+    {
+        QLineF line( mapFromItem(startItem, startOffsetX, startOffsetY), mapFromItem(endItem, endOffsetX, endOffsetY) );
+        setLine(line);
+    }
+    else
+    {
+        QLineF line( mapFromItem(startItem, startOffsetX, startOffsetY), mapFromItem(startItem, startOffsetX, startOffsetY) );
+        setLine(line);
+    }
 }

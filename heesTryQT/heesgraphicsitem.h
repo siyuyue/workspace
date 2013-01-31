@@ -17,25 +17,36 @@ class HEESGraphicsItem : public QGraphicsPolygonItem
 {
 public:
     HEESGraphicsItem(int t);
+    ~HEESGraphicsItem();
 
     DerivedAttributes * myAttributes();
     ItemType myType();
 
-    void setLeftArrow(HEESGraphicsItem *item);
-    void setRightArrow(HEESGraphicsItem *item);
+    void setLeftItem(HEESGraphicsItem *item);
+    void setRightItem(HEESGraphicsItem *item);
+    void addConverter(HEESGraphicsItem *converter);
+    void removeConverter(HEESGraphicsItem *converter);
+    void portItemRemoved(HEESGraphicsItem *item);
+    void updateArrowLocation();
+    QString getPortAName();
+    QString getPortBName();
     QVariant itemChange(GraphicsItemChange change, const QVariant &value);
 
 public:
     QString name;
     QString derivedType;
-    QString portAName;
-    QString portBName;
 
 private:
     ItemType type;
     DerivedAttributes attributes;
+
+    HEESGraphicsItem *portAItem;
+    HEESGraphicsItem *portBItem;
+
     ArrowItem *leftArrow;
     ArrowItem *rightArrow;
+    QList<HEESGraphicsItem*> connectedConverters;
+    bool willBeRemoved;
 };
 
 #endif // HEESGRAPHICSITEM_H

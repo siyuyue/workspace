@@ -20,7 +20,7 @@ HEESItemWidget::HEESItemWidget(QWidget *parent) :
     derivedLabel = new QLabel("Derived Type:", parent);
     derivedEdit = new QLineEdit(parent);
     attributeTableView = new QTableView(parent);
-    deleteButton = new QPushButton(QString("Remove Component"),parent);
+    removeButton = new QPushButton(QString("Remove Component"),parent);
 
     QHBoxLayout *hLayout1 = new QHBoxLayout;
     hLayout1->addWidget(typeLabel);
@@ -51,7 +51,7 @@ HEESItemWidget::HEESItemWidget(QWidget *parent) :
     vLayout->addLayout(hLayout4);
     vLayout->addLayout(hLayout5);
     vLayout->addWidget(attributeTableView, 1);
-    vLayout->addWidget(deleteButton);
+    vLayout->addWidget(removeButton);
 
     QGridLayout *layout = new QGridLayout;
     layout->addLayout(vLayout, 0, 0);
@@ -64,6 +64,7 @@ HEESItemWidget::HEESItemWidget(QWidget *parent) :
     connect(derivedEdit, SIGNAL(editingFinished()), this, SLOT(derivedEditFinished()));
     connect(selectPortAButton, SIGNAL(clicked()), this, SLOT(selectAClicked()));
     connect(selectPortBButton, SIGNAL(clicked()), this, SLOT(selectBClicked()));
+    connect(removeButton, SIGNAL(clicked()), this, SLOT(removeClicked()));
 }
 
 void HEESItemWidget::setModel(HEESGraphicsItem *modelItem)
@@ -103,8 +104,8 @@ void HEESItemWidget::setModel(HEESGraphicsItem *modelItem)
             typeNameLabel->setText(QString("Converter"));
             selectPortAButton->setEnabled(true);
             selectPortBButton->setEnabled(true);
-            portANameLabel->setText(item->portAName);
-            portBNameLabel->setText(item->portBName);
+            portANameLabel->setText(item->getPortAName());
+            portBNameLabel->setText(item->getPortBName());
             break;
         }
 
@@ -136,20 +137,23 @@ void HEESItemWidget::selectBClicked()
     emit selectPort();
 }
 
+void HEESItemWidget::removeClicked()
+{
+    emit removeItem(item);
+}
+
 void HEESItemWidget::portSelectedFromScene(HEESGraphicsItem *port)
 {
-    if( port == NULL)
+    if( port == NULL || port->myType() == CONVERTER )
         return;
     if( isPortA )
     {
-        item->portAName = port->name;
-        portANameLabel->setText(item->portAName);
-        item->setLeftArrow(port);
+        item->setLeftItem(port);
+        portANameLabel->setText(item->getPortAName());
     }
     else
     {
-        item->portBName = port->name;
-        portBNameLabel->setText(item->portBName);
-        item->setRightArrow(port);
+        item->setRightItem(port);
+        portBNameLabel->setText(item->getPortBName());
     }
 }

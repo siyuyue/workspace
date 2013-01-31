@@ -2,6 +2,11 @@
 
 HEESGraphicsItem::HEESGraphicsItem(int t)
 {
+    leftArrow = NULL;
+    rightArrow = NULL;
+    portAItem = NULL;
+    portBItem = NULL;
+
     qreal xPos = 0;
     qreal yPos = 0;
     type = ItemType(t);
@@ -45,6 +50,8 @@ HEESGraphicsItem::HEESGraphicsItem(int t)
         myPolygon = path.toFillPolygon();
         break;
     case CONVERTER:
+        leftArrow = new ArrowItem(true, this);
+        rightArrow = new ArrowItem(false, this);
         path.moveTo(xPos, yPos);
         path.lineTo(xPos + 5, yPos + 5);
         path.lineTo(xPos + 5, yPos + 25);
@@ -66,12 +73,21 @@ HEESGraphicsItem::HEESGraphicsItem(int t)
 
     setPos(qrand() % 200 - 100, qrand() % 200 - 100);
 
-    leftArrow = NULL;
-    rightArrow = NULL;
-
     // Make other components stay on top of the converter and arrows
     if( type != CONVERTER)
         setZValue(1);
+
+    willBeRemoved = false;
+}
+
+HEESGraphicsItem::~HEESGraphicsItem()
+{
+    willBeRemoved = true;
+    for(int i=0;i<connectedConverters.size();i++)
+    {
+        connectedConverters[i]->portItemRemoved(this);
+        connectedConverters[i]->updateArrowLocation();
+    }
 }
 
 DerivedAttributes * HEESGraphicsItem::myAttributes()
@@ -84,25 +100,75 @@ ItemType HEESGraphicsItem::myType()
     return type;
 }
 
-void HEESGraphicsItem::setLeftArrow(HEESGraphicsItem *item)
+void HEESGraphicsItem::setLeftItem(HEESGraphicsItem *item)
 {
-    if( leftArrow != NULL )
-        delete leftArrow;
-    leftArrow = new ArrowItem(this, item, true, this);
+    portAItem = item;
+    leftArrow->setEndItem(item);
 }
 
-void HEESGraphicsItem::setRightArrow(HEESGraphicsItem *item)
+void HEESGraphicsItem::setRightItem(HEESGraphicsItem *item)
 {
-    if( rightArrow != NULL )
-        delete rightArrow;
-    rightArrow = new ArrowItem(this, item, false, this);
+    portBItem = item;
+    rightArrow->setEndItem(item);
+}
+
+void HEESGraphicsItem::addConverter(HEESGraphicsItem *converter)
+{
+    connectedConverters.push_back(converter);
+}
+
+void HEESGraphicsItem::removeConverter(HEESGraphicsItem *converter)
+{
+    if(!willBeRemoved)
+        connectedConverters.removeOne(converter);
+}
+
+void HEESGraphicsItem::portItemRemoved(HEESGraphicsItem *item)
+{
+    if(item == portAItem)
+    {
+        portAItem = NULL;
+        leftArrow->setEndItem(NULL);
+    }
+    if(item == portBItem)
+    {
+        portBItem = NULL;
+        rightArrow->setEndItem(NULL);
+    }
+}
+
+void HEESGraphicsItem::updateArrowLocation()
+{
+    if(leftArrow)
+        leftArrow->updatePosition();
+    if(rightArrow)
+        rightArrow->updatePosition();
+}
+
+QString HEESGraphicsItem::getPortAName()
+{
+    if(portAItem)
+        return portAItem->name;
+    return QString();
+}
+
+QString HEESGraphicsItem::getPortBName()
+{
+    if(portBItem)
+        return portBItem->name;
+    return QString();
 }
 
 QVariant HEESGraphicsItem::itemChange(GraphicsItemChange change, const QVariant &value)
 {
     if (change == QGraphicsItem::ItemPositionChange)
     {
-        ;
+        if(leftArrow)
+            leftArrow->updatePosition();
+        if(rightArrow)
+            rightArrow->updatePosition();
+        for(int i=0;i<connectedConverters.size();i++)
+            connectedConverters[i]->updateArrowLocation();
     }
 
     return value;

@@ -22,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(scene, SIGNAL(selectionChanged()), this, SLOT(selectionChangedInScene()) );
     connect(ui->widget, SIGNAL(selectPort()), this, SLOT(selectPortInScene()) );
     connect(scene, SIGNAL(portSelected(HEESGraphicsItem*)), ui->widget, SLOT(portSelectedFromScene(HEESGraphicsItem*)));
+    connect(ui->widget, SIGNAL(removeItem(HEESGraphicsItem*)), this, SLOT(removeItemInScene(HEESGraphicsItem*)));
 }
 
 MainWindow::~MainWindow()
@@ -44,6 +45,12 @@ void MainWindow::selectionChangedInScene()
     {
         ui->widget->setModel(static_cast<HEESGraphicsItem*>(itemList[0]));
     }
+}
+
+void MainWindow::removeItemInScene(HEESGraphicsItem* item)
+{
+    scene->removeItem(item);
+    delete item;
 }
 
 void MainWindow::selectPortInScene()

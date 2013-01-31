@@ -9,7 +9,10 @@ class HEESGraphicsItem;
 class ArrowItem : public QGraphicsLineItem
 {
 public:
-    explicit ArrowItem(HEESGraphicsItem *startItemP, HEESGraphicsItem *endItemP, bool isLeftPort = true, QGraphicsItem *parent = 0);
+    explicit ArrowItem(bool isLeftPort, QGraphicsItem *parent);
+    ~ArrowItem();
+
+    void setEndItem(HEESGraphicsItem* item);
 
 public:
     void updatePosition();
