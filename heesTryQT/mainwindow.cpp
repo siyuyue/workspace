@@ -20,6 +20,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->graphicsView->setScene( scene );
 
     connect(scene, SIGNAL(selectionChanged()), this, SLOT(selectionChangedInScene()) );
+    connect(ui->widget, SIGNAL(selectPort()), this, SLOT(selectPortInScene()) );
+    connect(scene, SIGNAL(portSelected(HEESGraphicsItem*)), ui->widget, SLOT(portSelectedFromScene(HEESGraphicsItem*)));
 }
 
 MainWindow::~MainWindow()
@@ -44,6 +46,10 @@ void MainWindow::selectionChangedInScene()
     }
 }
 
+void MainWindow::selectPortInScene()
+{
+    scene->setAddArrowMode();
+}
 
 void MainWindow::on_addButton_clicked()
 {

@@ -31,9 +31,17 @@ public:
     HEESItemWidget(QWidget *parent = 0);
     void setModel( HEESGraphicsItem *modelItem );
 
+signals:
+    void selectPort();
+
+public slots:
+    void portSelectedFromScene(HEESGraphicsItem *port);
+
 private slots:
     void nameEditFinished();
     void derivedEditFinished();
+    void selectAClicked();
+    void selectBClicked();
 
 private:
     QLabel *typeLabel;
@@ -56,6 +64,8 @@ private:
     QPushButton *deleteButton;
 
     HEESGraphicsItem *item;
+
+    bool isPortA;
 };
 
 #endif

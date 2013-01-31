@@ -2,6 +2,8 @@
 #define HEESSYSTEMSCENE_H
 
 #include <QGraphicsScene>
+#include <QGraphicsSceneMouseEvent>
+#include "heesgraphicsitem.h"
 
 class HEESSystemScene : public QGraphicsScene
 {
@@ -12,10 +14,14 @@ public:
     explicit HEESSystemScene(QObject *parent = 0);
     void setAddArrowMode();
 
+signals:
+    void portSelected(HEESGraphicsItem *item);
+
 protected:
-     void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent);
-     void mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent);
-     void mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent);
+    void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent);
+    void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *mouseEvent);
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent);
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent);
 
 private:
      Mode myMode;

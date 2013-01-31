@@ -57,6 +57,8 @@ HEESGraphicsItem::HEESGraphicsItem(int t)
     break;
     }
 
+    QBrush brush(QColor(255,255,255));
+    setBrush(brush);
     setPolygon(myPolygon);
     setFlag(QGraphicsItem::ItemIsMovable, true);
     setFlag(QGraphicsItem::ItemIsSelectable, true);
@@ -66,6 +68,10 @@ HEESGraphicsItem::HEESGraphicsItem(int t)
 
     leftArrow = NULL;
     rightArrow = NULL;
+
+    // Make other components stay on top of the converter and arrows
+    if( type != CONVERTER)
+        setZValue(1);
 }
 
 DerivedAttributes * HEESGraphicsItem::myAttributes()
@@ -76,4 +82,28 @@ DerivedAttributes * HEESGraphicsItem::myAttributes()
 ItemType HEESGraphicsItem::myType()
 {
     return type;
+}
+
+void HEESGraphicsItem::setLeftArrow(HEESGraphicsItem *item)
+{
+    if( leftArrow != NULL )
+        delete leftArrow;
+    leftArrow = new ArrowItem(this, item, true, this);
+}
+
+void HEESGraphicsItem::setRightArrow(HEESGraphicsItem *item)
+{
+    if( rightArrow != NULL )
+        delete rightArrow;
+    rightArrow = new ArrowItem(this, item, false, this);
+}
+
+QVariant HEESGraphicsItem::itemChange(GraphicsItemChange change, const QVariant &value)
+{
+    if (change == QGraphicsItem::ItemPositionChange)
+    {
+        ;
+    }
+
+    return value;
 }

@@ -21,6 +21,10 @@ public:
     DerivedAttributes * myAttributes();
     ItemType myType();
 
+    void setLeftArrow(HEESGraphicsItem *item);
+    void setRightArrow(HEESGraphicsItem *item);
+    QVariant itemChange(GraphicsItemChange change, const QVariant &value);
+
 public:
     QString name;
     QString derivedType;

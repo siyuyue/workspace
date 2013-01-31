@@ -19,6 +19,7 @@ public:
 
 public slots:
     void selectionChangedInScene();
+    void selectPortInScene();
     
 private slots:
     void on_addButton_clicked();

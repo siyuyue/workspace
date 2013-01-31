@@ -62,6 +62,8 @@ HEESItemWidget::HEESItemWidget(QWidget *parent) :
 
     connect(nameEdit, SIGNAL(editingFinished()), this, SLOT(nameEditFinished()));
     connect(derivedEdit, SIGNAL(editingFinished()), this, SLOT(derivedEditFinished()));
+    connect(selectPortAButton, SIGNAL(clicked()), this, SLOT(selectAClicked()));
+    connect(selectPortBButton, SIGNAL(clicked()), this, SLOT(selectBClicked()));
 }
 
 void HEESItemWidget::setModel(HEESGraphicsItem *modelItem)
@@ -120,4 +122,34 @@ void HEESItemWidget::nameEditFinished()
 void HEESItemWidget::derivedEditFinished()
 {
     item->derivedType = derivedEdit->text();
+}
+
+void HEESItemWidget::selectAClicked()
+{
+    isPortA = true;
+    emit selectPort();
+}
+
+void HEESItemWidget::selectBClicked()
+{
+    isPortA = false;
+    emit selectPort();
+}
+
+void HEESItemWidget::portSelectedFromScene(HEESGraphicsItem *port)
+{
+    if( port == NULL)
+        return;
+    if( isPortA )
+    {
+        item->portAName = port->name;
+        portANameLabel->setText(item->portAName);
+        item->setLeftArrow(port);
+    }
+    else
+    {
+        item->portBName = port->name;
+        portBNameLabel->setText(item->portBName);
+        item->setRightArrow(port);
+    }
 }
