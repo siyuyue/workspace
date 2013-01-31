@@ -3,8 +3,6 @@
 HEESItemWidget::HEESItemWidget(QWidget *parent) :
     QWidget(parent)
 {
-    item = NULL;
-
     typeLabel = new QLabel(QString("Type:"), parent);
     typeNameLabel = new QLabel(parent);
 
@@ -55,15 +53,71 @@ HEESItemWidget::HEESItemWidget(QWidget *parent) :
     vLayout->addWidget(attributeTableView, 1);
     vLayout->addWidget(deleteButton);
 
-    groupBox = new QGroupBox;
-
     QGridLayout *layout = new QGridLayout;
     layout->addLayout(vLayout, 0, 0);
 
     setLayout(layout);
+
+    setModel(NULL);
+
+    connect(nameEdit, SIGNAL(editingFinished()), this, SLOT(nameEditFinished()));
+    connect(derivedEdit, SIGNAL(editingFinished()), this, SLOT(derivedEditFinished()));
 }
 
 void HEESItemWidget::setModel(HEESGraphicsItem *modelItem)
 {
     item = modelItem;
+    if( item == NULL)
+    {
+        setEnabled(false);
+        typeNameLabel->clear();
+        nameEdit->clear();
+        portANameLabel->clear();
+        portBNameLabel->clear();
+        derivedEdit->clear();
+        attributeTableView->setModel(NULL);
+    }
+    else
+    {
+        setEnabled(true);
+        selectPortAButton->setEnabled(false);
+        selectPortBButton->setEnabled(false);
+
+        switch( item->myType() )
+        {
+        case SOURCE:
+            typeNameLabel->setText(QString("Source"));
+            break;
+        case BANK:
+            typeNameLabel->setText(QString("Bank"));
+            break;
+        case LOAD:
+            typeNameLabel->setText(QString("Load"));
+            break;
+        case CTI:
+            typeNameLabel->setText(QString("CTI"));
+            break;
+        case CONVERTER:
+            typeNameLabel->setText(QString("Converter"));
+            selectPortAButton->setEnabled(true);
+            selectPortBButton->setEnabled(true);
+            portANameLabel->setText(item->portAName);
+            portBNameLabel->setText(item->portBName);
+            break;
+        }
+
+        nameEdit->setText(item->name);
+        derivedEdit->setText(item->derivedType);
+        attributeTableView->setModel(item->myAttributes());
+    }
+}
+
+void HEESItemWidget::nameEditFinished()
+{
+    item->name = nameEdit->text();
+}
+
+void HEESItemWidget::derivedEditFinished()
+{
+    item->derivedType = derivedEdit->text();
 }

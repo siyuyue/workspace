@@ -31,6 +31,10 @@ public:
     HEESItemWidget(QWidget *parent = 0);
     void setModel( HEESGraphicsItem *modelItem );
 
+private slots:
+    void nameEditFinished();
+    void derivedEditFinished();
+
 private:
     QLabel *typeLabel;
     QLabel *typeNameLabel;
@@ -50,8 +54,6 @@ private:
     QLineEdit *derivedEdit;
     QTableView *attributeTableView;
     QPushButton *deleteButton;
-
-    QGroupBox *groupBox;
 
     HEESGraphicsItem *item;
 };

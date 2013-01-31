@@ -23,16 +23,6 @@ public slots:
 private slots:
     void on_addButton_clicked();
 
-    void on_nameEdit_editingFinished();
-
-    void on_derivedEdit_editingFinished();
-
-    void on_deleteButton_clicked();
-
-    void on_selectPortAButton_clicked();
-
-    void on_selectPortBButton_clicked();
-
 private:
     Ui::MainWindow *ui;
     HEESSystemScene *scene;
