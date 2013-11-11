@@ -21,6 +21,7 @@ int main(int argc, char **argv)
     if( N <= 0 )
     {
         printf("Matrix size must be positive!\n");
+        return -1;
     }
 
 	matA = (double*)malloc(sizeof(double)*N*N);
