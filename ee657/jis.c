@@ -26,6 +26,8 @@ int main(int argc, char **argv)
 
 	matA = (double*)malloc(sizeof(double)*N*N);
 	matB = (double*)malloc(sizeof(double)*N*N);
+    if (matA == NULL || matB == NULL)
+        printf("Oh!");
     // initialize matrix A and B
     for(i=0;i<N;i++)
     {
