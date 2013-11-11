@@ -17,3 +17,6 @@
 
 # QT Build Folder
 QT-build/
+
+# Executables
+bin/
