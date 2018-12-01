@@ -7,5 +7,6 @@ GIT_PS1_SHOWUPSTREAM="auto"
 GIT_PS1_SHOWCOLORHINTS="yes"
 GIT_PS1_SHOWDIRTYSTATE="yes"
 GIT_PS1_SHOWUNTRACKEDFILES="yes"
+# From https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
 source ~/.git-prompt.sh
 export PROMPT_COMMAND='__git_ps1 "\u@\h:\W" "\\\$ ";'
