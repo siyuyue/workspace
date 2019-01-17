@@ -13,6 +13,7 @@ GIT_PS1_SHOWUPSTREAM="auto"
 GIT_PS1_SHOWCOLORHINTS="yes"
 GIT_PS1_SHOWDIRTYSTATE="yes"
 GIT_PS1_SHOWUNTRACKEDFILES="yes"
+# From https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh
 source ~/.git-prompt.sh
 regex=".*\/([^\/]*)\/[^\/]*$"
 export PROMPT_COMMAND='__git_ps1 "\[${YELLOW}\]${VIRTUAL_ENV:+$(echo $VIRTUAL_ENV | sed -E "s/$regex/(\1)/")}\[${RESET}\]\u@\h:\[${CYAN}\]\W\[${RESET}\]" "\\\$ ";'
